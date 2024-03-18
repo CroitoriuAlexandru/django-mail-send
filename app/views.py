@@ -16,7 +16,7 @@ from .decorators import unauthentificated_user, allowed_users
 
 
 
-api_key = "test"  # Replace with your actual OpenAI API key
+api_key = ""  # Replace with your actual OpenAI API key
 
 
 def generate_email_body(subject, api_key):
@@ -39,7 +39,9 @@ def generate_email_body(subject, api_key):
 
 def send_email_with_outlook(recipient, subject, message, attachment_path):
     """Send an email using Outlook with an attachment."""
+    print("Before dispatching Outlook")
     ol = win32com.client.Dispatch("Outlook.Application")
+    print("After dispatching Outlook")
     newmail = ol.CreateItem(0x0)
     newmail.Subject = subject
     newmail.To = recipient
@@ -49,9 +51,8 @@ def send_email_with_outlook(recipient, subject, message, attachment_path):
         newmail.Attachments.Add(attachment_path)
     newmail.Send()
     
-
 # @allowed_users(allowed_roles=[])
-def getHome(request):
+def Home(request):
     if request.method == 'GET':
         context = {}
         return render(request, './templates/get.html', context)
@@ -62,8 +63,8 @@ def getHome(request):
         # Generate the email body
         email_body = generate_email_body(subject, api_key)
         # Replace with actual recipient, subject, and attachment path
-        recipient = "nykw2002@gmail.com"
-        attachment_path = "36.pdf"
+        recipient = "croitoriu.alexandru.code@gmail.com"
+        attachment_path = "./36.pdf"
         # Send the email
         send_email_with_outlook(recipient, subject, email_body, attachment_path)
         print(request.POST.email)

@@ -1,19 +1,22 @@
 {% extends './base.html' %}
-
-{% block title %}get{% endblock %}
-
-{% block content %}
+{% block title %}get{% endblock %} 
+{% block content%}
 <div id="test"></div>
 <div>
-    <form 
-    hx-post="{% url 'getHome' %}"
-    hx-trigger="submit" 
-    hx-target="#test"
-    hx-swap="innerHTML"
-    >
-        <label for="email">email:</label>
-        <input type="email" name="email" id="email" class="border-2 border-gray-300 p-2">
-        <button type="submit" class="bg-blue-500 text-white p-2">Submit</button>
-    </form>
+	<form
+		hx-post="{% url 'Home' %}"
+		hx-trigger="submit"
+		hx-target="#test"
+		hx-swap="innerHTML"
+	>
+		<label for="email">email:</label>
+		<input
+			type="email"
+			name="email"
+			id="email"
+			class="border-2 border-gray-300 p-2"
+		/>
+		<button type="submit" class="bg-blue-500 text-white p-2">Submit</button>
+	</form>
 </div>
 {% endblock content %}
